@@ -1,6 +1,6 @@
 {
   "name": "@virket/events-core",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Virket Events core module (interfaces, models, repositories, services, state management and more) for an ionic5 app",
   "main": "index.js",
   "typings": "./dist/index.d.ts",

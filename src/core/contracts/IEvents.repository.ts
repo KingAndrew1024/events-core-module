@@ -34,3 +34,9 @@ export interface IEventsCommonProps{
     place: string
     title: string
 }
+
+export interface IEventReminder{
+    id: number
+    text: string
+    date: Date
+}

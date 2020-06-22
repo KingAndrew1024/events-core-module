@@ -66,7 +66,7 @@ const reducer = createReducer(
             isLoading: false,
             items: [action.event, ...state.items],
             error: null,
-            success: { after: getSuccessActionType(action.type) }
+            success: { after: getSuccessActionType(action.type), data: action.event }
         })
     ),
     on(fromActions.UpdateEventSuccessAction,

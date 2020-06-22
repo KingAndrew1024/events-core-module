@@ -6,4 +6,5 @@ export interface IEventsStateError {
 
 export interface IEventsStateSuccess {
     after: 'GET' | 'CREATE' | 'UPDATE' | 'DELETE' | 'UNKNOWN'
+    data?: any
 }
