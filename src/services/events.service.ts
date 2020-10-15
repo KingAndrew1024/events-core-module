@@ -16,8 +16,9 @@ export class EventsService implements IEventsService<EventModel>{
     getEvents(): Observable<EventModel[]> {
         return this.repository.getEvents().pipe(
             map((response) => {
-
                 return response.data.map(m => EventModel.fromDataResponse(m))
+                //Always sort ASC
+                .sort((a, b) => a.datetimeFrom.localeCompare(b.datetimeFrom))
             }),
             catchError(error => {
                 throw error
