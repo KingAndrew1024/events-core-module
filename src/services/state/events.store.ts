@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-import * as fromSelector from '../../store/events.selectors';
+import { IEventsCommonProps } from '../../core/contracts/IEvents.repository';
 import * as fromActions from '../../store/events.actions';
 import * as fromReducer from '../../store/events.reducer';
-import { IEventsCommonProps } from '../../core/contracts/IEvents.repository';
-
+import * as fromSelector from '../../store/events.selectors';
 
 @Injectable()
 export class EventsStore {
-    constructor(private store: Store<fromReducer.EventsState>){}
+    constructor(private store: Store<fromReducer.EventsState>) { }
 
     get Loading$() {
         return this.store.select(fromSelector.getIsLoading);
@@ -23,7 +21,7 @@ export class EventsStore {
         return this.store.select(fromSelector.getSuccess);
     }
 
-    get Calendar$(){
+    get Calendar$() {
         return this.store.select(fromSelector.getEvents);
     }
 
@@ -32,24 +30,24 @@ export class EventsStore {
         return this.store.select(fromSelector.getEventById);
     }
 
-    selectedEvent$(){
+    selectedEvent$() {
         return this.store.select(fromSelector.getSelectedEventId);
     }
 
-    getEvents(){
+    getEvents() {
         return this.store.dispatch(fromActions.GetEventsBeginAction());
     }
 
-    createEvent(payload: IEventsCommonProps){
-        return this.store.dispatch(fromActions.CreateEventBeginAction({payload}));
+    createEvent(payload: IEventsCommonProps) {
+        return this.store.dispatch(fromActions.CreateEventBeginAction({ payload }));
     }
 
-    updateEvent(id: number, payload: IEventsCommonProps){
-        return this.store.dispatch(fromActions.UpdateEventBeginAction({id: id, payload: payload}));
+    updateEvent(id: number, payload: IEventsCommonProps) {
+        return this.store.dispatch(fromActions.UpdateEventBeginAction({ id, payload }));
     }
 
-    deleteEvent(eventId: number){
-        return this.store.dispatch(fromActions.DeleteEventBeginAction({eventId}));
+    deleteEvent(eventId: number) {
+        return this.store.dispatch(fromActions.DeleteEventBeginAction({ eventId }));
     }
 
 }

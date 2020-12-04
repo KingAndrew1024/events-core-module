@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs';
-
 import { IHttpBasicResponse } from './IHttpBasicResponse';
 
 export interface IEventsRepository {
@@ -9,12 +8,12 @@ export interface IEventsRepository {
     deleteEvent(payload: number): Observable<IHttpBasicResponse<null>>;
 }
 
-export interface IEventsApiProps extends IEventsCommonProps{
-    client_id: string
-    id: string
+export interface IEventsApiProps extends IEventsCommonProps {
+    client_id: string;
+    id: string;
 }
 
-export interface IEventsCommonProps{
+export interface IEventsCommonProps {
     attendees: Array<{
         contact_id?: string
         email?: string
@@ -23,21 +22,21 @@ export interface IEventsCommonProps{
         last_name: string
         name: string
         phone?: string
-    }>
-    
-    datetime_from: string
-    datetime_to: string
-    description: string
-    
-    latitude: string
-    longitude: string
-    place: string
-    title: string
+    }>;
+
+    datetime_from: string;
+    datetime_to: string;
+    description: string;
+
+    latitude: string;
+    longitude: string;
+    place: string;
+    title: string;
 }
 
-export interface IEventReminder{
-    id: number
-    title: string
-    text: string
-    date: Date
+export interface IEventReminder {
+    id: number;
+    title: string;
+    text: string;
+    date: Date;
 }

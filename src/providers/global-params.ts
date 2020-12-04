@@ -10,11 +10,11 @@ export class AppSettingsService {
 
     setApiUrl(url: string) { this.apiUrl = url; }
     getApiUrl() { return this.apiUrl; }
-    setInstanceName(val: string) { this.instanceName = val };
-    getInstanceName() { return this.instanceName };
+    setInstanceName(val: string) { this.instanceName = val; }
+    getInstanceName() { return this.instanceName; }
 }
 
-export interface EventsModuleOptionsInterface{
-    apiUrl: string
-    instanceName: string
-  };
+export interface EventsModuleOptionsInterface {
+    apiUrl: string;
+    instanceName: string;
+}

@@ -1,8 +1,6 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
-
-import * as fromReducer from './events.reducer';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { EventModel } from '../core/models/events.model';
-
+import * as fromReducer from './events.reducer';
 
 export const getEventsState = createFeatureSelector<fromReducer.EventsState>('events');
 
@@ -11,43 +9,43 @@ export const getEventsPageState = createSelector(
     state => state
 );
 
-const _getIsLoading = (state: fromReducer.EventsState) => state.isLoading;
+const stateGetIsLoading = (state: fromReducer.EventsState) => state.isLoading;
 
-export const _getEvents = (state: fromReducer.EventsState) => state.items;
+export const stateGetEvents = (state: fromReducer.EventsState) => state.items;
 
-export const _getFilteredItems = (state: fromReducer.EventsState) => state.filteredItems;
+export const stateGetFilteredItems = (state: fromReducer.EventsState) => state.filteredItems;
 
 export const getIsLoading = createSelector(
     getEventsPageState,
-    _getIsLoading
+    stateGetIsLoading
 );
 
 export const getError = createSelector(
     getEventsPageState,
     state => state.error
-)
+);
 
 export const getSuccess = createSelector(
     getEventsPageState,
     state => state.success
-)
+);
 
 export const getEvents = createSelector(
     getEventsPageState,
-    _getEvents
-)
+    stateGetEvents
+);
 
 export const getFilteredEvents = createSelector(
     getEventsPageState,
-    _getFilteredItems
-)
+    stateGetFilteredItems
+);
 
 export const getEventById = createSelector(
     getEventsPageState,
-    state => state.items.filter((m: EventModel) => +m.id == state.selectedId)[0]
-)
+    state => state.items.filter((m: EventModel) => +m.id === state.selectedId)[0]
+);
 
 export const getSelectedEventId = createSelector(
     getEventsPageState,
     state => state.selectedId
-)
+);
