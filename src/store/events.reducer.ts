@@ -55,7 +55,7 @@ const reducer = createReducer(
             isLoading: false,
             items: action.events,
             error: null,
-            success: null
+            success: { after: getSuccessActionType(action.type) }
         })
     ),
     on(fromActions.CreateEventSuccessAction,

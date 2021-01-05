@@ -31,20 +31,6 @@ export class EventModel implements IEventModelProps {
         this.attendees = data.attendees;
     }
 
-    static toStorage(event: EventModel): IEventModelProps {
-        return {
-            id: event.id,
-            title: event.title,
-            description: event.description,
-            place: event.place,
-            datetimeFrom: event.datetimeFrom,
-            datetimeTo: event.datetimeTo,
-            latitude: event.latitude,
-            longitude: event.longitude,
-            attendees: event.attendees,
-        };
-    }
-
     static fromDataResponse(data: IEventsApiProps): EventModel {
         data.attendees = data.attendees || [];
 

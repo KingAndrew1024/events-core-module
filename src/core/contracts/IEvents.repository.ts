@@ -40,3 +40,14 @@ export interface IEventReminder {
     text: string;
     date: Date;
 }
+
+export interface IEventFormProps {
+    title: string;
+    place: string;
+    datetime_from: string;
+    datetime_to: string;
+    attendees: Array<{ contact_id: number }>;
+    description: string;
+    latitude: string;
+    longitude: string;
+}

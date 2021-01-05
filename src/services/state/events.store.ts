@@ -7,7 +7,7 @@ import * as fromSelector from '../../store/events.selectors';
 
 @Injectable()
 export class EventsStore {
-    constructor(private store: Store<fromReducer.EventsState>) { }
+    constructor(public store: Store<fromReducer.EventsState>) { }
 
     get Loading$() {
         return this.store.select(fromSelector.getIsLoading);

@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { IEventsApiProps, IEventsCommonProps } from '../core/contracts/IEvents.repository';
+import { IEventsApiProps, IEventsCommonProps, IEventsRepository } from '../core/contracts/IEvents.repository';
 import { IEventsService } from '../core/contracts/IEvents.service';
 import { IHttpBasicResponse } from '../core/contracts/IHttpBasicResponse';
 import { EventModel } from '../core/models/events.model';
-import { EventsRepository } from '../repositories/events.repository';
+import { EVENTS_REPOSITORY } from './identifiers';
 
 @Injectable()
 export class EventsService implements IEventsService<EventModel>{
-    constructor(private repository: EventsRepository) { }
+
+    constructor(@Inject(EVENTS_REPOSITORY) private repository: IEventsRepository) { }
 
     getEvents(): Observable<EventModel[]> {
         return this.repository.getEvents().pipe(

@@ -6,6 +6,7 @@ import { IEventsService } from '../core/contracts/IEvents.service';
 import { EventModel } from '../core/models/events.model';
 import { EVENTS_SERVICE } from '../services/identifiers';
 import * as fromActions from './events.actions';
+import * as fromReducer from './events.reducer';
 
 @Injectable()
 export class EventsEffects {
@@ -80,4 +81,8 @@ export class EventsEffects {
         private actions$: Actions,
         @Inject(EVENTS_SERVICE) private service: IEventsService<EventModel>
     ) { }
+}
+
+export interface AppState {
+    events: fromReducer.EventsState;
 }

@@ -9,7 +9,7 @@ export const getEventsPageState = createSelector(
     state => state
 );
 
-const stateGetIsLoading = (state: fromReducer.EventsState) => state.isLoading;
+export const stateGetIsLoading = (state: fromReducer.EventsState) => state.isLoading;
 
 export const stateGetEvents = (state: fromReducer.EventsState) => state.items;
 

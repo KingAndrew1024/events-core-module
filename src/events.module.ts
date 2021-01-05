@@ -5,7 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppSettingsService, EventsModuleOptionsInterface } from './providers/global-params';
 import { EventsRepository } from './repositories/events.repository';
 import { EventsService } from './services/events.service';
-import { EVENTS_SERVICE } from './services/identifiers';
+import { EVENTS_REPOSITORY, EVENTS_SERVICE } from './services/identifiers';
 import { EventsStore } from './services/state/events.store';
 import { EventsEffects } from './store/events.effects';
 import { eventsReducer } from './store/events.reducer';
@@ -46,7 +46,7 @@ export class EventsCoreModule {
                     deps: [AppSettingsObject]
                 },
                 { provide: EVENTS_SERVICE, useClass: EventsService },
-                EventsRepository,
+                { provide: EVENTS_REPOSITORY, useClass: EventsRepository },
                 EventsStore
             ]
         };
