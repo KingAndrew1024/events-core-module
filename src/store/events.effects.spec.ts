@@ -49,7 +49,7 @@ describe('EventsEffects', () => {
         expect(effects).toBeTruthy('EventsEffects not created');
     });
 
-    it('load$ Should return a GetEventSuccess action with the Event List on success', (done: DoneFn) => {
+    it('load$ Should return a GetEventSuccess action with the expected payload', (done: DoneFn) => {
         const fakeEventModelList: Array<any> = [{}, {}, {}];
 
         const spy = spyOn(eventsService, 'getEvents').and.returnValue(of(fakeEventModelList));
@@ -60,9 +60,8 @@ describe('EventsEffects', () => {
             expect(response.type).toEqual(EventsActionTypes.GetEventsSuccess);
             expect((response as any).events.length).toEqual(fakeEventModelList.length);
             expect(spy).toHaveBeenCalledTimes(1);
+            done();
         });
-
-        done();
     });
     it('load$ Should return a GetEventFail action with the error object on failure', (done: DoneFn) => {
         const spy = spyOn(eventsService, 'getEvents').and.returnValue(throwError(errorString));
@@ -74,13 +73,12 @@ describe('EventsEffects', () => {
             expect((response as any).errors).toBeDefined();
             expect((response as any).errors).toBe(errorString);
             expect(spy).toHaveBeenCalledTimes(1);
+            done();
         });
-
-        done();
     });
 
-    it('create$ Should return a CreateEventSuccess action with the Event on success', (done: DoneFn) => {
-        const fakeEventModel: any = {};
+    it('create$ Should return a CreateEventSuccess action with the expected payload', (done: DoneFn) => {
+        const fakeEventModel: any = { hello: 'world'};
 
         const spy = spyOn(eventsService, 'createEvent').and.returnValue(of(fakeEventModel));
 
@@ -88,11 +86,10 @@ describe('EventsEffects', () => {
 
         effects.create$.subscribe(response => {
             expect(response.type).toEqual(EventsActionTypes.CreateEventSuccess);
-            expect((response as any).event).toBeDefined();
+            expect((response as any).event).toBe(fakeEventModel);
             expect(spy).toHaveBeenCalledTimes(1);
+            done();
         });
-
-        done();
     });
     it('create$ Should return a CreateEventFail action with the error object on failure', (done: DoneFn) => {
         const spy = spyOn(eventsService, 'createEvent').and.returnValue(throwError(errorString));
@@ -104,13 +101,12 @@ describe('EventsEffects', () => {
             expect((response as any).errors).toBeDefined();
             expect((response as any).errors).toBe(errorString);
             expect(spy).toHaveBeenCalledTimes(1);
+            done();
         });
-
-        done();
     });
 
-    it('update$ Should return a UpdateEventSuccess action with the Event on success', (done: DoneFn) => {
-        const fakeEventModel: any = {};
+    it('update$ Should return a UpdateEventSuccess action with the expected payload', (done: DoneFn) => {
+        const fakeEventModel: any = { hello: 'world'};
 
         const spy = spyOn(eventsService, 'updateEvent').and.returnValue(of(fakeEventModel));
 
@@ -118,11 +114,10 @@ describe('EventsEffects', () => {
 
         effects.update$.subscribe(response => {
             expect(response.type).toEqual(EventsActionTypes.UpdateEventSuccess);
-            expect((response as any).event).toBeDefined();
+            expect((response as any).event).toBe(fakeEventModel);
             expect(spy).toHaveBeenCalledTimes(1);
+            done();
         });
-
-        done();
     });
     it('update$ Should return a UpdateEventFail action with the error object on failure', (done: DoneFn) => {
         const spy = spyOn(eventsService, 'updateEvent').and.returnValue(throwError(errorString));
@@ -134,12 +129,11 @@ describe('EventsEffects', () => {
             expect((response as any).errors).toBeDefined();
             expect((response as any).errors).toBe(errorString);
             expect(spy).toHaveBeenCalledTimes(1);
+            done();
         });
-
-        done();
     });
 
-    it('delete$ Should return a DeleteEventSuccess action with true as response', (done: DoneFn) => {
+    it('delete$ Should return a DeleteEventSuccess action with expected payload', (done: DoneFn) => {
         const eventId = 123;
 
         const spy = spyOn(eventsService, 'deleteEvent').and.returnValue(of(true));
@@ -148,11 +142,10 @@ describe('EventsEffects', () => {
 
         effects.delete$.subscribe(response => {
             expect(response.type).toEqual(EventsActionTypes.DeleteEventSuccess);
-            expect((response as any).eventId).toEqual(eventId);
+            expect((response as any).eventId).toBe(eventId);
             expect(spy).toHaveBeenCalledTimes(1);
+            done();
         });
-
-        done();
     });
     it('delete$ Should return a DeleteEventFail action with the error object on failure', (done: DoneFn) => {
         const spy = spyOn(eventsService, 'deleteEvent').and.returnValue(of(false));
@@ -164,9 +157,8 @@ describe('EventsEffects', () => {
             expect((response as any).errors).toBeDefined();
             expect((response as any).errors).toBe('Error desconocido');
             expect(spy).toHaveBeenCalledTimes(1);
+            done();
         });
-
-        done();
     });
     it('delete$ Should return a DeleteEventFail action with the error object on failure', (done: DoneFn) => {
         const spy = spyOn(eventsService, 'deleteEvent').and.returnValue(throwError(errorString));
@@ -178,8 +170,7 @@ describe('EventsEffects', () => {
             expect((response as any).errors).toBeDefined();
             expect((response as any).errors).toBe(errorString);
             expect(spy).toHaveBeenCalledTimes(1);
+            done();
         });
-
-        done();
     });
 });

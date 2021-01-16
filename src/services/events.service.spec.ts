@@ -10,11 +10,9 @@ import { EVENTS_REPOSITORY, EVENTS_SERVICE } from './identifiers';
 
 describe('EventsService', () => {
     let eventsService: IEventsService<EventModel>;
-    let eventsRepositorySpy: IEventsRepository;
-    let eventsRepositoryMock: IEventsRepository;
+    let mockEventsRepository: IEventsRepository;
 
     beforeEach(() => {
-        eventsRepositorySpy = jasmine.createSpyObj('EventsRepository', ['getEvents', 'createEvent', 'updateEvent', 'deleteEvent']);
 
         TestBed.configureTestingModule({
             providers: [
@@ -23,7 +21,7 @@ describe('EventsService', () => {
             ]
         });
 
-        eventsRepositoryMock = TestBed.inject(EVENTS_REPOSITORY);
+        mockEventsRepository = TestBed.inject(EVENTS_REPOSITORY);
         eventsService = TestBed.inject(EVENTS_SERVICE);
     });
 
@@ -44,7 +42,7 @@ describe('EventsService', () => {
             });
     });
     it('Should get an empty list of Events', (done: DoneFn) => {
-        spyOn(eventsRepositoryMock, 'getEvents').and.returnValue(of({
+        spyOn(mockEventsRepository, 'getEvents').and.returnValue(of({
             data: [],
             status: 'success'
         }));
@@ -58,7 +56,7 @@ describe('EventsService', () => {
             });
     });
     it('Should fail to get Events', (done: DoneFn) => {
-        spyOn(eventsRepositoryMock, 'getEvents').and.returnValue(throwError('some bad error'));
+        spyOn(mockEventsRepository, 'getEvents').and.returnValue(throwError('some bad error'));
 
         eventsService.getEvents()
             .subscribe(() => {}, error => {
@@ -91,7 +89,7 @@ describe('EventsService', () => {
             });
     });
     it('Should fail to create an Event', (done: DoneFn) => {
-        spyOn(eventsRepositoryMock, 'createEvent').and.returnValue(throwError('some bad error'));
+        spyOn(mockEventsRepository, 'createEvent').and.returnValue(throwError('some bad error'));
 
         const fakePayload: IEventsCommonProps = {
             attendees: [],
@@ -135,7 +133,7 @@ describe('EventsService', () => {
             });
     });
     it('Should fail to update an Event', (done: DoneFn) => {
-        spyOn(eventsRepositoryMock, 'updateEvent').and.returnValue(throwError('some bad error'));
+        spyOn(mockEventsRepository, 'updateEvent').and.returnValue(throwError('some bad error'));
 
         const fakePayload: IEventsCommonProps = {
             attendees: [],
@@ -164,7 +162,7 @@ describe('EventsService', () => {
             });
     });
     it('Should fail to delete an Event', (done: DoneFn) => {
-        spyOn(eventsRepositoryMock, 'deleteEvent').and.returnValue(throwError('some bad error'));
+        spyOn(mockEventsRepository, 'deleteEvent').and.returnValue(throwError('some bad error'));
 
         eventsService.deleteEvent(123)
             .subscribe(() => {}, error => {

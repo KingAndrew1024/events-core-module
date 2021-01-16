@@ -28,7 +28,7 @@ describe('EventsStore', () => {
     });
 
     it('Should be created', () => {
-        expect(eventsStore).toBeTruthy('eventsStore not created');
+        expect(eventsStore).toBeTruthy('EventsStore not created');
     });
 
     it('Loading$ shoud call select once with parameter fromSelector.getIsLoading', (done: DoneFn) => {

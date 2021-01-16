@@ -14,26 +14,31 @@ import {
 } from './events.selectors';
 
 describe('Events Selectors', () => {
+    const expectedIsLoading = true;
+    const expectedItems = TEST_EVENTS_FORM_MODEL_LIST as any;
+    const expectedFilteredItems = TEST_EVENTS_FORM_MODEL_LIST.slice(1) as any;
+    const expectedSelectedId = TEST_EVENTS_FORM_MODEL_LIST[1].id;
+
     const state: fromReducer.EventsState = {
         ...fromReducer.initialState,
-        isLoading: true,
-        items: [...TEST_EVENTS_FORM_MODEL_LIST as any],
-        filteredItems: TEST_EVENTS_FORM_MODEL_LIST.slice(1) as any,
-        selectedId: TEST_EVENTS_FORM_MODEL_LIST[1].id,
+        isLoading: expectedIsLoading,
+        items: expectedItems,
+        filteredItems: expectedFilteredItems,
+        selectedId: expectedSelectedId,
     };
 
     const pageState: AppState = { events: state };
 
     it('stateGetIsLoading should retrieve state.isLoading value', () => {
-        expect(stateGetIsLoading(state)).toBe(state.isLoading);
+        expect(stateGetIsLoading(state)).toBe(expectedIsLoading);
     });
 
     it('stateGetEvents should retrieve state.items value', () => {
-        expect(stateGetEvents(state)).toBe(state.items);
+        expect(stateGetEvents(state)).toBe(expectedItems);
     });
 
     it('stateGetFilteredItems should retrieve state.filteredItems value', () => {
-        expect(stateGetFilteredItems(state)).toEqual(TEST_EVENTS_FORM_MODEL_LIST.slice(1) as any);
+        expect(stateGetFilteredItems(state)).toEqual(expectedFilteredItems);
     });
 
     it('getEventsPageState should retrieve state', () => {
@@ -41,7 +46,7 @@ describe('Events Selectors', () => {
     });
 
     it('getIsLoading should retrieve state.isLoading value', () => {
-        expect(getIsLoading(pageState)).toBe(state.isLoading);
+        expect(getIsLoading(pageState)).toBe(expectedIsLoading);
     });
 
     it('getError should retrieve state.error value', () => {
@@ -53,10 +58,10 @@ describe('Events Selectors', () => {
     });
 
     it('getEventById should retrieve the event with id = state.selectedId', () => {
-        expect(getEventById(pageState)).toEqual(TEST_EVENTS_FORM_MODEL_LIST[1] as any);
+        expect(getEventById(pageState)).toEqual(TEST_EVENTS_FORM_MODEL_LIST.filter(e => e.id === expectedSelectedId)[0] as any);
     });
 
     it('getSelectedEventId should retrieve state.selectedId', () => {
-        expect(getSelectedEventId(pageState)).toEqual(TEST_EVENTS_FORM_MODEL_LIST[1].id);
+        expect(getSelectedEventId(pageState)).toEqual(expectedSelectedId);
     });
 });
